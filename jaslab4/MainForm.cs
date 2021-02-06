@@ -35,6 +35,7 @@ namespace jaslab4
             passengerGrid.Columns.Add("first_name", "first_name");
             passengerGrid.Columns.Add("last_name", "last_name");
             passengerGrid.Columns.Add("sex", "sex");
+            OnSplitterMoved(null, null);
             
             _dataSet = new DataSet();
             _dataSet.Tables.Add("cabins");
@@ -217,6 +218,16 @@ namespace jaslab4
 
             var cabin = (Cabin) sel[0].Tag;
             FillPassengersGrid(_selectedCabinId = cabin.CabinId);
+        }
+        
+        private void OnSplitterMoved(object sender, SplitterEventArgs e)
+        {
+            cabinGrid.Columns["cabin_name"].Width = cabinGrid.Width / 3 - 1;
+            cabinGrid.Columns["square"].Width = cabinGrid.Width / 3 - 1;
+            cabinGrid.Columns["class_name"].Width = cabinGrid.Width / 3 - 1;
+            passengerGrid.Columns["first_name"].Width = passengerGrid.Width / 3 - 1;
+            passengerGrid.Columns["last_name"].Width = passengerGrid.Width / 3 - 1;
+            passengerGrid.Columns["sex"].Width = passengerGrid.Width / 3 - 1;
         }
     }
 }

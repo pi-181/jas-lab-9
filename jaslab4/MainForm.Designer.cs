@@ -106,6 +106,7 @@
             this.splitContainer1.Size = new System.Drawing.Size(542, 426);
             this.splitContainer1.SplitterDistance = 257;
             this.splitContainer1.TabIndex = 1;
+            this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.OnSplitterMoved);
             // 
             // groupBox1
             // 
