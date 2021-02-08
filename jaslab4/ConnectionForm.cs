@@ -56,7 +56,7 @@ namespace jaslab4
         
         private static void BuildSchema(Configuration config)
         {
-            new SchemaExport(config).Create(false, true);
+            new SchemaExport(config).Create(false, false);
         }
     }
 }

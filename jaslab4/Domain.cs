@@ -59,7 +59,7 @@ namespace jaslab4
             Map(x => x.LastName, "last_name");
             Map(x => x.Sex, "sex");
             
-            References(x => x.Cabin).Column("cabin_id").Cascade.All();
+            References(x => x.Cabin).Column("cabin_id").Cascade.None();
         }
     }
 }

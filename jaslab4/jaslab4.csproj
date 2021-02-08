@@ -42,7 +42,8 @@
         </Reference>
         <Reference Include="mscorlib" />
         <Reference Include="NHibernate, Version=5.3.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4">
-          <HintPath>C:\Users\demko\.nuget\packages\nhibernate\5.3.3\lib\net461\NHibernate.dll</HintPath>
+          <HintPath>..\packages\NHibernate.5.3.5\lib\net461\NHibernate.dll</HintPath>
+          <Private>True</Private>
         </Reference>
         <Reference Include="Npgsql, Version=5.0.3.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7">
           <HintPath>..\packages\Npgsql.5.0.3\lib\netstandard2.0\Npgsql.dll</HintPath>
