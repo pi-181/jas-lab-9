@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using NHibernate;
 
 namespace jaslab4
@@ -9,7 +10,7 @@ namespace jaslab4
 
         T GetById(int id);
 
-        List<T> GetAll();
+        IList<T> GetAll();
 
         void Delete(T item);
 
@@ -28,7 +29,7 @@ namespace jaslab4
 
         public void SaveOrUpdate(T item)
         {
-            ITransaction transaction = session.BeginTransaction();
+            var transaction = session.BeginTransaction();
             session.SaveOrUpdate(item);
             transaction.Commit();
             session.Flush();
@@ -39,23 +40,53 @@ namespace jaslab4
             return session.Get<T>(id);
         }
 
-        public List<T> GetAll()
+        public IList<T> GetAll()
         {
-            return new List<T>(session.CreateCriteria(typeof(T)).List<T>());
+            return session
+                .CreateCriteria(typeof(T))
+                .List<T>();
         }
 
         public void Delete(T item)
         {
-            ITransaction transaction = session.BeginTransaction();
+            var transaction = session.BeginTransaction();
             session.Delete(item);
             transaction.Commit();
             session.Flush();
         }
     }
 
+    public interface ICabinDAO : IGenericDAO<Cabin>
+    {
+        Cabin GetCabinByName(string name);
+        void RemoveCabinByName(string name);
+    }
+    
     public interface IPassengerDAO : IGenericDAO<Passenger>
     {
-        IEnumerable<Passenger> GetPassengerByCabin(int cabinId);
+        IList<Passenger> GetPassengerByCabin(int cabinId);
+    }
+
+    public class CabinDAO : GenericDAO<Cabin>, ICabinDAO
+    {
+        public CabinDAO(ISession session) : base(session)
+        {
+            
+        }
+        
+        public Cabin GetCabinByName(string name)
+        {
+            return session.CreateSQLQuery(@"SELECT * FROM cabins WHERE cabin_name LIKE :cab_name")
+                .AddEntity("Cabin", typeof(Cabin))
+                .SetParameter("cab_name", name)
+                .List<Cabin>()
+                .FirstOrDefault();
+        }
+
+        public void RemoveCabinByName(string name)
+        {
+            Delete(GetCabinByName(name));
+        }
     }
     
     public class PassengerDAO : GenericDAO<Passenger>, IPassengerDAO
@@ -65,7 +96,7 @@ namespace jaslab4
             
         }
 
-        public IEnumerable<Passenger> GetPassengerByCabin(int cabin_id)
+        public IList<Passenger> GetPassengerByCabin(int cabin_id)
         {
             return session.CreateSQLQuery("SELECT * FROM passengers WHERE cabin_id = " + cabin_id)
                 .AddEntity("Passenger", typeof(Passenger))
@@ -75,7 +106,7 @@ namespace jaslab4
 
     public abstract class DAOFactory
     {
-        public abstract IGenericDAO<Cabin> getCabinDAO();
+        public abstract ICabinDAO getCabinDAO();
         public abstract IPassengerDAO getPassengerDAO();
     }
     
@@ -89,9 +120,9 @@ namespace jaslab4
             this.session = session;
         }
 
-        public override IGenericDAO<Cabin> getCabinDAO() 
+        public override ICabinDAO getCabinDAO() 
         {
-            return new GenericDAO<Cabin>(session);
+            return new CabinDAO(session);
         }
 
         public override IPassengerDAO getPassengerDAO()
@@ -99,6 +130,5 @@ namespace jaslab4
             return new PassengerDAO(session);
         }
     }
-
-
+    
 }

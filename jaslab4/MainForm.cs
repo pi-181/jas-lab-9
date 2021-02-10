@@ -166,7 +166,7 @@ namespace jaslab4
             
             var cabin = (Cabin) selectedRows[0].Tag;
             _cabinForm.Reset(true, cabin.CabinName, cabin.Square, cabin.ClassName);
-            _cabinForm.Id = cabin.CabinId;
+            _cabinForm.Id = cabin.Id;
             _cabinForm.Visible = true;
         }
 
@@ -191,7 +191,7 @@ namespace jaslab4
             if (dr != DialogResult.Yes) return;
 
             var passenger = (Passenger) selected[0].Tag;
-            var cabinId = passenger.Cabin.CabinId;
+            var cabinId = passenger.Cabin.Id;
             
             new NHibernateDAOFactory(Session).getPassengerDAO().Delete(passenger);
             FillPassengersGrid(cabinId);
@@ -205,7 +205,7 @@ namespace jaslab4
             
             var p = (Passenger) selectedRows[0].Tag;
             _passengerForm.Reset(true, p.FirstName, p.LastName, p.Sex);
-            _passengerForm.Id = p.PassengerId;
+            _passengerForm.Id = p.Id;
             _passengerForm.CabinId = _selectedCabinId;
             _passengerForm.Visible = true;
         }
@@ -217,7 +217,7 @@ namespace jaslab4
             if (sel.Count == 0) return;
 
             var cabin = (Cabin) sel[0].Tag;
-            FillPassengersGrid(_selectedCabinId = cabin.CabinId);
+            FillPassengersGrid(_selectedCabinId = cabin.Id);
         }
         
         private void OnSplitterMoved(object sender, SplitterEventArgs e)
