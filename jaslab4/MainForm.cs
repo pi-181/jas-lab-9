@@ -16,8 +16,6 @@ namespace jaslab4
     {
         public ISession Session { get; set; }
 
-        private readonly DataSet _dataSet;
-
         private readonly ConnectionForm _connectionForm;
         private readonly CabinForm _cabinForm;
         private readonly PassengerForm _passengerForm;
@@ -36,10 +34,6 @@ namespace jaslab4
             passengerGrid.Columns.Add("last_name", "last_name");
             passengerGrid.Columns.Add("sex", "sex");
             OnSplitterMoved(null, null);
-            
-            _dataSet = new DataSet();
-            _dataSet.Tables.Add("cabins");
-            _dataSet.Tables.Add("passengers");
 
             _connectionForm = new ConnectionForm {Parent = this};
             _cabinForm = new CabinForm {Parent = this};
