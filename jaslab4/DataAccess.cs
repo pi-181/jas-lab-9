@@ -56,58 +56,38 @@ namespace jaslab4
         }
     }
 
-    public interface ICabinDAO : IGenericDAO<Cabin>
+    public interface ITripDAO : IGenericDAO<Trip>
     {
-        Cabin GetCabinByName(string name);
-        void RemoveCabinByName(string name);
+        Trip GetTripByName(string name);
+        void RemoveTripByName(string name);
     }
     
-    public interface IPassengerDAO : IGenericDAO<Passenger>
+    public class TripDao : GenericDAO<Trip>, ITripDAO
     {
-        IList<Passenger> GetPassengerByCabin(int cabinId);
-    }
-
-    public class CabinDAO : GenericDAO<Cabin>, ICabinDAO
-    {
-        public CabinDAO(ISession session) : base(session)
+        public TripDao(ISession session) : base(session)
         {
             
         }
         
-        public Cabin GetCabinByName(string name)
+        public Trip GetTripByName(string name)
         {
-            return session.CreateSQLQuery(@"SELECT * FROM cabins WHERE cabin_name LIKE :cab_name")
-                .AddEntity("Cabin", typeof(Cabin))
-                .SetParameter("cab_name", name)
-                .List<Cabin>()
+            return session.CreateSQLQuery(@"SELECT * FROM trips WHERE trip_name LIKE :trip_name")
+                .AddEntity("Trip", typeof(Trip))
+                .SetParameter("trip_name", name)
+                .List<Trip>()
                 .FirstOrDefault();
         }
 
-        public void RemoveCabinByName(string name)
+        public void RemoveTripByName(string name)
         {
-            Delete(GetCabinByName(name));
-        }
-    }
-    
-    public class PassengerDAO : GenericDAO<Passenger>, IPassengerDAO
-    {
-        public PassengerDAO(ISession session) : base(session)
-        {
-            
-        }
-
-        public IList<Passenger> GetPassengerByCabin(int cabin_id)
-        {
-            return session.CreateSQLQuery("SELECT * FROM passengers WHERE cabin_id = " + cabin_id)
-                .AddEntity("Passenger", typeof(Passenger))
-                .List<Passenger>();
+            Delete(GetTripByName(name));
         }
     }
 
     public abstract class DAOFactory
     {
-        public abstract ICabinDAO getCabinDAO();
-        public abstract IPassengerDAO getPassengerDAO();
+        public abstract ITripDAO getTripDAO();
+        public abstract IGenericDAO<Passenger> getPassengerDAO();
     }
     
     public class NHibernateDAOFactory : DAOFactory
@@ -120,14 +100,14 @@ namespace jaslab4
             this.session = session;
         }
 
-        public override ICabinDAO getCabinDAO() 
+        public override ITripDAO getTripDAO() 
         {
-            return new CabinDAO(session);
+            return new TripDao(session);
         }
 
-        public override IPassengerDAO getPassengerDAO()
+        public override IGenericDAO<Passenger> getPassengerDAO()
         {
-            return new PassengerDAO(session);
+            return new GenericDAO<Passenger>(session);
         }
     }
     

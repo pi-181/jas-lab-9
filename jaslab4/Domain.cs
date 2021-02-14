@@ -7,35 +7,42 @@ namespace jaslab4
     {
         public virtual int Id { get; set; }
     }
-    
-    public class Cabin : EntityBase
+
+
+    public class Trip : EntityBase
     {
-        public virtual string CabinName { get; set; } = "";
-        public virtual int Square { get; set; }
-        public virtual string ClassName { get; set; } = "";
-        public virtual IList<Passenger> Passengers { get; set; } = new List<Passenger>();
+        public virtual string Name { get; set; } = "";
+        public virtual string Source { get; set; } = "";
+        public virtual string Target { get; set; } = "";
+
+        public virtual IList<Passenger> Passengers { get; set; }
+
+        public Trip()
+        {
+            Passengers = new List<Passenger>();
+        }
     }
 
-    public class CabinMap : ClassMap<Cabin>
+    public class TripMap : ClassMap<Trip>
     {
-        public CabinMap()
+        public TripMap()
         {
             // Указание имени таблицы для зачетной книжки
-            Table("cabins");
+            Table("trips");
             
             // Отображение идентификатора на колонку таблицы
-            Id(x => x.Id, "cabin_id").GeneratedBy.Native();
+            Id(x => x.Id, "trip_id").GeneratedBy.Native();
             
             // Отображение обычного поля на колонку таблицы
-            Map(x => x.CabinName, "cabin_name").Unique();
-            Map(x => x.Square, "square");
-            Map(x => x.ClassName, "class_name");
+            Map(x => x.Name, "trip_name").Unique();
+            Map(x => x.Source, "source");
+            Map(x => x.Target, "target");
 
-            HasMany(x => x.Passengers).KeyColumns
-                .Add("cabin_id")
-                .Inverse()
-                .Cascade
-                .All();
+            HasManyToMany(x => x.Passengers)
+                .Table("trips_passengers")
+                .ParentKeyColumn("trip_id")
+                .ChildKeyColumn("pass_id")
+                .Cascade.SaveUpdate();
         }
     }
     
@@ -44,7 +51,12 @@ namespace jaslab4
         public virtual string FirstName { get; set; }
         public virtual string LastName { get; set; }
         public virtual string Sex { get; set; }
-        public virtual Cabin Cabin { get; set; }
+        public virtual IList<Trip> Trips { get; set; }
+
+        public Passenger()
+        {
+            Trips = new List<Trip>();
+        }
     }
     
     public class PassengerMap : ClassMap<Passenger>
@@ -61,8 +73,11 @@ namespace jaslab4
             Map(x => x.FirstName, "first_name");
             Map(x => x.LastName, "last_name");
             Map(x => x.Sex, "sex");
-            
-            References(x => x.Cabin).Column("cabin_id").Cascade.None();
+           
+            HasManyToMany(x => x.Trips)
+                .Table("trips_passengers")
+                .ParentKeyColumn("pass_id")
+                .ChildKeyColumn("trip_id");
         }
     }
 }

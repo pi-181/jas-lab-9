@@ -66,7 +66,7 @@ namespace jaslab4
             this.databaseBox.Name = "databaseBox";
             this.databaseBox.Size = new System.Drawing.Size(170, 20);
             this.databaseBox.TabIndex = 2;
-            this.databaseBox.Text = "jaslab3";
+            this.databaseBox.Text = "jaslab4";
             // 
             // userBox
             // 

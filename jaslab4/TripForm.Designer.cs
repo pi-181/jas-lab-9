@@ -2,7 +2,7 @@
 
 namespace jaslab4
 {
-    partial class CabinForm
+    partial class TripForm
     {
         /// <summary>
         /// Required designer variable.
@@ -32,10 +32,10 @@ namespace jaslab4
         private void InitializeComponent()
         {
             this.nameBox = new System.Windows.Forms.TextBox();
-            this.squareBox = new System.Windows.Forms.TextBox();
+            this.sourceBox = new System.Windows.Forms.TextBox();
             this.addButton = new System.Windows.Forms.Button();
             this.editButton = new System.Windows.Forms.Button();
-            this.classBox = new System.Windows.Forms.TextBox();
+            this.targetBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -48,12 +48,12 @@ namespace jaslab4
             this.nameBox.Size = new System.Drawing.Size(160, 20);
             this.nameBox.TabIndex = 0;
             // 
-            // squareBox
+            // sourceBox
             // 
-            this.squareBox.Location = new System.Drawing.Point(12, 77);
-            this.squareBox.Name = "squareBox";
-            this.squareBox.Size = new System.Drawing.Size(160, 20);
-            this.squareBox.TabIndex = 1;
+            this.sourceBox.Location = new System.Drawing.Point(12, 77);
+            this.sourceBox.Name = "sourceBox";
+            this.sourceBox.Size = new System.Drawing.Size(160, 20);
+            this.sourceBox.TabIndex = 1;
             // 
             // addButton
             // 
@@ -75,12 +75,12 @@ namespace jaslab4
             this.editButton.UseVisualStyleBackColor = true;
             this.editButton.Click += new System.EventHandler(this.OnEditButtonClick);
             // 
-            // classBox
+            // targetBox
             // 
-            this.classBox.Location = new System.Drawing.Point(12, 118);
-            this.classBox.Name = "classBox";
-            this.classBox.Size = new System.Drawing.Size(160, 20);
-            this.classBox.TabIndex = 4;
+            this.targetBox.Location = new System.Drawing.Point(12, 118);
+            this.targetBox.Name = "targetBox";
+            this.targetBox.Size = new System.Drawing.Size(160, 20);
+            this.targetBox.TabIndex = 4;
             // 
             // label1
             // 
@@ -88,7 +88,7 @@ namespace jaslab4
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(160, 15);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Назва каюти";
+            this.label1.Text = "Назва подорожі";
             // 
             // label2
             // 
@@ -96,7 +96,7 @@ namespace jaslab4
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(160, 15);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Площа";
+            this.label2.Text = "Місце відправлення";
             // 
             // label3
             // 
@@ -104,7 +104,7 @@ namespace jaslab4
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(160, 15);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Клас";
+            this.label3.Text = "Місце призначення";
             // 
             // CabinForm
             // 
@@ -115,15 +115,15 @@ namespace jaslab4
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.classBox);
+            this.Controls.Add(this.targetBox);
             this.Controls.Add(this.editButton);
             this.Controls.Add(this.addButton);
-            this.Controls.Add(this.squareBox);
+            this.Controls.Add(this.sourceBox);
             this.Controls.Add(this.nameBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Location = new System.Drawing.Point(15, 15);
-            this.Name = "CabinForm";
-            this.Text = "Каюта";
+            this.Name = "TripForm";
+            this.Text = "Подорож";
             this.ResumeLayout(false);
             this.PerformLayout();
         }
@@ -133,13 +133,13 @@ namespace jaslab4
 
         private System.Windows.Forms.Label label1;
 
-        private System.Windows.Forms.TextBox classBox;
+        private System.Windows.Forms.TextBox targetBox;
 
         private System.Windows.Forms.Button addButton;
         private System.Windows.Forms.Button editButton;
 
         private System.Windows.Forms.TextBox nameBox;
-        private System.Windows.Forms.TextBox squareBox;
+        private System.Windows.Forms.TextBox sourceBox;
 
         #endregion
     }

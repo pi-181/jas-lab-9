@@ -36,7 +36,7 @@
             this.відключенняВідБДToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.cabinGrid = new System.Windows.Forms.DataGridView();
+            this.tripGrid = new System.Windows.Forms.DataGridView();
             this.cabinContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.додатиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.видалитиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,13 +47,14 @@
             this.додатиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.видалитиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.редагуватиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.додатиДоПодорожіToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize) (this.cabinGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.tripGrid)).BeginInit();
             this.cabinContextMenuStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.passengerGrid)).BeginInit();
@@ -110,30 +111,30 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.cabinGrid);
+            this.groupBox1.Controls.Add(this.tripGrid);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(257, 426);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Каюта";
+            this.groupBox1.Text = "Подорож";
             // 
-            // cabinGrid
+            // tripGrid
             // 
-            this.cabinGrid.AllowUserToAddRows = false;
-            this.cabinGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.cabinGrid.ContextMenuStrip = this.cabinContextMenuStrip;
-            this.cabinGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.cabinGrid.Location = new System.Drawing.Point(3, 16);
-            this.cabinGrid.MultiSelect = false;
-            this.cabinGrid.Name = "cabinGrid";
-            this.cabinGrid.ReadOnly = true;
-            this.cabinGrid.RowHeadersVisible = false;
-            this.cabinGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.cabinGrid.Size = new System.Drawing.Size(251, 407);
-            this.cabinGrid.TabIndex = 0;
-            this.cabinGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnCabinCellClick);
+            this.tripGrid.AllowUserToAddRows = false;
+            this.tripGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tripGrid.ContextMenuStrip = this.cabinContextMenuStrip;
+            this.tripGrid.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tripGrid.Location = new System.Drawing.Point(3, 16);
+            this.tripGrid.MultiSelect = false;
+            this.tripGrid.Name = "tripGrid";
+            this.tripGrid.ReadOnly = true;
+            this.tripGrid.RowHeadersVisible = false;
+            this.tripGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tripGrid.Size = new System.Drawing.Size(251, 407);
+            this.tripGrid.TabIndex = 0;
+            this.tripGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.OnTripCellClick);
             // 
             // cabinContextMenuStrip
             // 
@@ -146,21 +147,21 @@
             this.додатиToolStripMenuItem.Name = "додатиToolStripMenuItem";
             this.додатиToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.додатиToolStripMenuItem.Text = "Додати";
-            this.додатиToolStripMenuItem.Click += new System.EventHandler(this.OnContextCabinAddClick);
+            this.додатиToolStripMenuItem.Click += new System.EventHandler(this.OnContextTripAddClick);
             // 
             // видалитиToolStripMenuItem
             // 
             this.видалитиToolStripMenuItem.Name = "видалитиToolStripMenuItem";
             this.видалитиToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.видалитиToolStripMenuItem.Text = "Видалити";
-            this.видалитиToolStripMenuItem.Click += new System.EventHandler(this.OnContextCabinRemoveClick);
+            this.видалитиToolStripMenuItem.Click += new System.EventHandler(this.OnContextTripRemoveClick);
             // 
             // редагуватиToolStripMenuItem
             // 
             this.редагуватиToolStripMenuItem.Name = "редагуватиToolStripMenuItem";
             this.редагуватиToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.редагуватиToolStripMenuItem.Text = "Редагувати";
-            this.редагуватиToolStripMenuItem.Click += new System.EventHandler(this.OnContextCabinEditClick);
+            this.редагуватиToolStripMenuItem.Click += new System.EventHandler(this.OnContextTripEditClick);
             // 
             // groupBox2
             // 
@@ -190,30 +191,37 @@
             // 
             // passengerContextMenuStrip
             // 
-            this.passengerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.додатиToolStripMenuItem1, this.видалитиToolStripMenuItem1, this.редагуватиToolStripMenuItem1});
+            this.passengerContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.додатиToolStripMenuItem1, this.видалитиToolStripMenuItem1, this.редагуватиToolStripMenuItem1, this.додатиДоПодорожіToolStripMenuItem});
             this.passengerContextMenuStrip.Name = "contextMenuStrip2";
-            this.passengerContextMenuStrip.Size = new System.Drawing.Size(135, 70);
+            this.passengerContextMenuStrip.Size = new System.Drawing.Size(186, 92);
             // 
             // додатиToolStripMenuItem1
             // 
             this.додатиToolStripMenuItem1.Name = "додатиToolStripMenuItem1";
-            this.додатиToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
+            this.додатиToolStripMenuItem1.Size = new System.Drawing.Size(185, 22);
             this.додатиToolStripMenuItem1.Text = "Додати";
             this.додатиToolStripMenuItem1.Click += new System.EventHandler(this.OnContextPassengerAddClick);
             // 
             // видалитиToolStripMenuItem1
             // 
             this.видалитиToolStripMenuItem1.Name = "видалитиToolStripMenuItem1";
-            this.видалитиToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
+            this.видалитиToolStripMenuItem1.Size = new System.Drawing.Size(185, 22);
             this.видалитиToolStripMenuItem1.Text = "Видалити";
             this.видалитиToolStripMenuItem1.Click += new System.EventHandler(this.OnContextPassengerRemoveClick);
             // 
             // редагуватиToolStripMenuItem1
             // 
             this.редагуватиToolStripMenuItem1.Name = "редагуватиToolStripMenuItem1";
-            this.редагуватиToolStripMenuItem1.Size = new System.Drawing.Size(134, 22);
+            this.редагуватиToolStripMenuItem1.Size = new System.Drawing.Size(185, 22);
             this.редагуватиToolStripMenuItem1.Text = "Редагувати";
             this.редагуватиToolStripMenuItem1.Click += new System.EventHandler(this.OnContextPassengerEditClick);
+            // 
+            // додатиДоПодорожіToolStripMenuItem
+            // 
+            this.додатиДоПодорожіToolStripMenuItem.Name = "додатиДоПодорожіToolStripMenuItem";
+            this.додатиДоПодорожіToolStripMenuItem.Size = new System.Drawing.Size(185, 22);
+            this.додатиДоПодорожіToolStripMenuItem.Text = "Додати до подорожі";
+            this.додатиДоПодорожіToolStripMenuItem.Click += new System.EventHandler(this.OnContextPassengerAddToTripClick);
             // 
             // MainForm
             // 
@@ -232,7 +240,7 @@
             ((System.ComponentModel.ISupportInitialize) (this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize) (this.cabinGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.tripGrid)).EndInit();
             this.cabinContextMenuStrip.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize) (this.passengerGrid)).EndInit();
@@ -240,6 +248,8 @@
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.ToolStripMenuItem додатиДоПодорожіToolStripMenuItem;
 
         private System.Windows.Forms.ToolStripMenuItem видалитиToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem видалитиToolStripMenuItem1;
@@ -254,7 +264,7 @@
 
         private System.Windows.Forms.DataGridView passengerGrid;
 
-        private System.Windows.Forms.DataGridView cabinGrid;
+        private System.Windows.Forms.DataGridView tripGrid;
 
         private System.Windows.Forms.GroupBox groupBox2;
 

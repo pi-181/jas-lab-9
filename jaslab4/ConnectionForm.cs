@@ -25,11 +25,12 @@ namespace jaslab4
         {
             session = OpenSession(hostBox.Text, int.Parse(portBox.Text), databaseBox.Text, userBox.Text, passwordBox.Text);
             
-            Visible = false;
             Parent.Session = session;
+            Parent.Factory = new NHibernateDAOFactory(session);
             
-            Parent.FillCabinsGrid();
+            Parent.FillTripsGrid();
             Visible = false;
+            GC.KeepAlive(this);
         }
 
         private ISession OpenSession(string host, int port, string database, string user, string passwd)
@@ -46,7 +47,7 @@ namespace jaslab4
                             .Password(passwd)
                         )
                     )
-                    .Mappings(m => m.FluentMappings.Add<CabinMap>().Add<PassengerMap>())
+                    .Mappings(m => m.FluentMappings.Add<TripMap>().Add<PassengerMap>())
                     .ExposeConfiguration(BuildSchema)
                     .BuildSessionFactory();
             }
@@ -57,6 +58,11 @@ namespace jaslab4
         private static void BuildSchema(Configuration config)
         {
             new SchemaExport(config).Create(false, false);
+        }
+
+        public void SetPassword(string pass)
+        {
+            passwordBox.Text = pass;
         }
     }
 }

@@ -103,8 +103,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Domain.cs" />
-        <Compile Include="CabinForm.cs" />
-        <Compile Include="CabinForm.Designer.cs" />
+        <Compile Include="TripForm.cs" />
+        <Compile Include="TripForm.Designer.cs" />
         <Compile Include="ConnectionForm.cs" />
         <Compile Include="ConnectionForm.Designer.cs" />
         <Compile Include="DataAccess.cs" />
@@ -114,7 +114,13 @@
         <Compile Include="PassengerForm.Designer.cs" />
         <Compile Include="Program.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <EmbeddedResource Include="CabinForm.resx" />
+        <Compile Include="TripNameInput.cs">
+          <SubType>Form</SubType>
+        </Compile>
+        <Compile Include="TripNameInput.Designer.cs">
+          <DependentUpon>TripNameInput.cs</DependentUpon>
+        </Compile>
+        <EmbeddedResource Include="TripForm.resx" />
         <EmbeddedResource Include="ConnectionForm.resx" />
         <EmbeddedResource Include="MainForm.resx" />
         <EmbeddedResource Include="PassengerForm.resx" />
@@ -127,6 +133,9 @@
             <AutoGen>True</AutoGen>
             <DependentUpon>Resources.resx</DependentUpon>
         </Compile>
+        <EmbeddedResource Include="TripNameInput.resx">
+          <DependentUpon>TripNameInput.cs</DependentUpon>
+        </EmbeddedResource>
         <None Include="packages.config" />
         <None Include="Properties\Settings.settings">
             <Generator>SettingsSingleFileGenerator</Generator>
